@@ -11,7 +11,9 @@ export default function LanguageToggle({ currentLanguage, onLanguageChange }: La
     { code: 'en' as Language, name: 'English', native: 'English' },
     { code: 'hi' as Language, name: 'Hindi', native: 'हिंदी' },
     { code: 'mai' as Language, name: 'Maithili', native: 'मैथिली' },
-    { code: 'bho' as Language, name: 'Bhojpuri', native: 'भोजपुरी' }
+    { code: 'bho' as Language, name: 'Bhojpuri', native: 'भोजपुरी' },
+    { code: 'ta' as Language, name: 'Tamil', native: 'தமிழ்' },
+    { code: 'te' as Language, name: 'Telugu', native: 'తెలుగు' }
   ];
 
   return (
