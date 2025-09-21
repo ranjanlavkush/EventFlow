@@ -96,9 +96,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const data = insertChatMessageSchema.parse(req.body);
       
       // Get AI response from OpenAI
-      // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+      // Fixed: Using gpt-4-turbo which is currently available
       const completion = await openai.chat.completions.create({
-        model: "gpt-5",
+        model: "gpt-4-turbo",
         messages: [
           {
             role: "system",
@@ -109,18 +109,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
             content: data.message
           }
         ],
-        response_format: { type: "json_object" }
+        temperature: 0.7
       });
 
-      const aiResponse = JSON.parse(completion.choices[0].message.content || '{"response": "I apologize, but I could not process your request."}');
+      const aiResponse = completion.choices[0].message.content || "I apologize, but I could not process your request.";
       
       const chatMessage = await storage.createChatMessage({
         ...data,
-        response: aiResponse.response
+        response: aiResponse
       });
       
-      res.json({ response: aiResponse.response, messageId: chatMessage.id });
+      res.json({ response: aiResponse, messageId: chatMessage.id });
     } catch (error) {
+      console.error('OpenAI API Error:', error);
       res.status(500).json({ error: "Failed to get AI response" });
     }
   });

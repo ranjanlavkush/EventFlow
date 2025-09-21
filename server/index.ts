@@ -41,7 +41,7 @@ let isInitialized = false;
 
 async function initializeApp() {
   if (isInitialized) return;
-  
+
   // Setup routes
   await registerRoutes(app);
 
@@ -55,30 +55,27 @@ async function initializeApp() {
   isInitialized = true;
 }
 
-// For Vercel serverless functions
+// Vercel (serverless) vs local
 if (process.env.VERCEL) {
-  // Initialize for Vercel
-  initializeApp();
-  
-  // Export the app for Vercel
-  module.exports = app;
-  module.exports.default = app;
+  (async () => {
+    await initializeApp();
+    // Always serve built frontend on Vercel
+    serveStatic(app);
+  })();
 } else {
-  // For local development
   (async () => {
     await initializeApp();
 
-    // Create HTTP server manually
     const server = http.createServer(app);
 
-    // Setup Vite for development, or serve static files in production
-    if (app.get("env") === "development") {
+    if (process.env.NODE_ENV === "development") {
+      // Use Vite dev server middleware
       await setupVite(app, server);
     } else {
+      // Serve static frontend in production
       serveStatic(app);
     }
 
-    // Start listening on all interfaces (0.0.0.0)
     const port = parseInt(process.env.PORT || "5000", 10);
     server.listen(port, "0.0.0.0", () => {
       log(`🚀 Server running at http://localhost:${port}`);
@@ -86,3 +83,8 @@ if (process.env.VERCEL) {
     });
   })();
 }
+
+export default app;
+
+
+// Export the app for Vercel (must be at top level)
