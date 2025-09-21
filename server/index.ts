@@ -1,5 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
-import http from "http"; // ✅ needed to create HTTP server
+import http from "http";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -36,7 +36,12 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
+// Initialize the app
+let isInitialized = false;
+
+async function initializeApp() {
+  if (isInitialized) return;
+  
   // Setup routes
   await registerRoutes(app);
 
@@ -45,23 +50,39 @@ app.use((req, res, next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
     res.status(status).json({ message });
-    throw err;
   });
 
-  // ✅ Create HTTP server manually
-  const server = http.createServer(app);
+  isInitialized = true;
+}
 
-  // Setup Vite for development, or serve static files in production
-  if (app.get("env") === "development") {
-    await setupVite(app, server); // pass actual HTTP server
-  } else {
-    serveStatic(app);
-  }
+// For Vercel serverless functions
+if (process.env.VERCEL) {
+  // Initialize for Vercel
+  initializeApp();
+  
+  // Export the app for Vercel
+  module.exports = app;
+  module.exports.default = app;
+} else {
+  // For local development
+  (async () => {
+    await initializeApp();
 
-  // ✅ Start listening on Windows-friendly way
-  const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(port, () => {
-    log(`🚀 Server running at http://localhost:${port}`);
-  });
-})();
+    // Create HTTP server manually
+    const server = http.createServer(app);
 
+    // Setup Vite for development, or serve static files in production
+    if (app.get("env") === "development") {
+      await setupVite(app, server);
+    } else {
+      serveStatic(app);
+    }
+
+    // Start listening on all interfaces (0.0.0.0)
+    const port = parseInt(process.env.PORT || "5000", 10);
+    server.listen(port, "0.0.0.0", () => {
+      log(`🚀 Server running at http://localhost:${port}`);
+      log(`📱 Also accessible at http://[YOUR_IP]:${port}`);
+    });
+  })();
+}

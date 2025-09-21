@@ -1,114 +1,95 @@
-Perfect! Here's your updated **Replit AI prompt** with all 10 innovative features, your website name **Scholarship Hero**, and inclusive language that refers to **students** broadly:
+Scholarship Hero – Aadhaar Seeding & Scholarship Access Portal
+Why It Matters
 
----
+Every year, thousands of students miss out on scholarships they deserve—not because they don’t qualify, but because the process is confusing. Aadhaar seeding, DBT-enabled accounts, endless deadlines—it can feel like a maze, especially for families with limited digital know-how.
 
-### 💻 Prompt for Replit AI: Build a Scholarship Awareness Platform
+That’s where Scholarship Hero steps in. Think of it as a guide, mentor, and support system rolled into one. It makes the scholarship process simple, accessible, and stress-free.
 
-**Project Title:**  
-_Scholarship Hero – Aadhaar Seeding & Scholarship Access Portal_
+The Problems We’re Tackling
 
----
+Students don’t know the difference between Aadhaar-linked and DBT-enabled accounts.
 
-### 🧩 Problem Statement
+Deadlines and eligibility rules often go unnoticed.
 
-Many students eligible for Pre-Matric and Post-Matric scholarships under the SCD-V Division, DoSJE, face delays in receiving funds due to confusion between Aadhaar-linked and DBT-enabled Aadhaar-seeded bank accounts. Scholarship Hero should educate, guide, and empower users to complete Aadhaar seeding and access their scholarships without barriers.
+Help centers are hard to reach and information is scattered.
 
----
+Language barriers make things even tougher.
 
-### 🎯 Goals
+Our Mission
 
-- Educate students and parents on the difference between Aadhaar-linked and DBT-enabled accounts  
-- Guide users through the Aadhaar seeding process  
-- Promote awareness through interactive tools, videos, and downloadable materials  
-- Empower users to take action and verify their account status  
-- Ensure accessibility and multilingual support for diverse communities  
+Turn complex government jargon into plain, simple language.
 
----
+Offer step-by-step instructions for Aadhaar seeding.
 
-### 🛠️ Required Features
+Create interactive, multilingual tools that anyone can use.
 
-#### 1. ✅ **Smart Eligibility Wizard**
-- Conversational form that asks users about grade level, caste category, income bracket  
-- Dynamically displays eligible scholarships  
-- Includes visual progress bar and instant feedback
+Help students and parents check their account status with ease.
 
-#### 2. ✅ **DBT Seeding Status Simulator**
-- Mock walkthrough of a DBT status check  
-- Simulates what users will see on UIDAI or bank portals  
-- Helps users understand the verification process
+Build trust by keeping everything clear, accessible, and supportive.
 
-#### 3. ✅ **WhatsApp Integration for Updates**
-- Allow users to subscribe for alerts via WhatsApp  
-- Send reminders about deadlines, seeding status, and new scholarships  
-- Include opt-in form with phone number validation
+What Scholarship Hero Offers
+Eligibility Wizard
 
-#### 4. ✅ **Interactive Map of Nearby Help Centers**
-- Use geolocation or pin code input  
-- Show nearby banks, CSCs, UIDAI offices  
-- Include contact info, hours, and directions
+A simple form that asks about grade, caste, and income, then instantly shows which scholarships you qualify for—along with helpful tips and a progress tracker.
 
-#### 5. ✅ **Voice-Assisted Navigation**
-- Add voice support for key sections  
-- Read out instructions and guides  
-- Support Hindi, English, and regional dialects
+DBT Status Simulator
 
-#### 6. ✅ **Parent-Teacher Toolkit**
-- Downloadable posters, discussion guides, and checklists  
-- Designed for PTA meetings and school awareness drives  
-- Include print-friendly PDFs and editable templates
+A practice version of the real UIDAI/bank portals so users know exactly what to expect before checking their DBT status.
 
-#### 7. ✅ **Gamified Learning Module**
-- Mini quiz that teaches Aadhaar-linked vs DBT-enabled account differences  
-- Reward users with badges or certificates  
-- Include leaderboard or shareable achievement cards
+WhatsApp Alerts
 
-#### 8. ✅ **Scholarship Countdown Tracker**
-- Visual timeline of key dates: application, verification, disbursement  
-- Personalized based on user input  
-- Include calendar sync option (Google Calendar/iCal)
+Deadline reminders, scholarship updates, and seeding status updates—delivered directly on WhatsApp.
 
-#### 9. ✅ **Multilingual Toggle with Regional Dialects**
-- Support Hindi, English, Maithili, Bhojpuri  
-- Toggle button for language selection  
-- Ensure all content is translated and culturally adapted
+Help Center Finder
 
-#### 10. ✅ **AI Chat Assistant for Real-Time Help**
-- Chatbot that answers FAQs, helps fill forms, and guides troubleshooting  
-- Mobile-friendly and accessible
+Type your PIN code (or use GPS) to get a list of nearby banks, CSCs, and UIDAI offices, with directions and contact details.
 
----
+Voice Guidance
 
-### 📺 Bonus: **Video Awareness Section**
-- Embed YouTube video explaining Aadhaar seeding and DBT  
-- Responsive iframe with title and description  
-- Example:
-  ```html
-  <section id="video-awareness">
-    <h2>Watch & Learn: DBT and Aadhaar Seeding Explained</h2>
-    <p>Understand the difference and learn how to seed your bank account correctly.</p>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-  </section>
-  ```
+Step-by-step audio instructions in Hindi, English, Maithili, and Bhojpuri—for parents and students who prefer listening over reading.
 
----
+Parent & Teacher Toolkit
 
-### 🎨 Design Guidelines
+Downloadable posters, checklists, and guides for awareness sessions in schools and communities.
 
-- Mobile-first, responsive layout  
-- Use government-trusted colors (blue, white, green)  
-- Icons and illustrations for clarity  
-- Friendly, inclusive typography  
-- ARIA roles and semantic HTML for accessibility
+Gamified Learning
 
----
+Fun quizzes that teach key differences (like Aadhaar-linked vs DBT-enabled accounts). Users earn badges and shareable certificates.
 
-### 📍 Target Audience
+Scholarship Countdown
 
-- Students (Pre/Post-Matric)  
-- Parents and guardians  
-- School teachers and administrators  
-- Gram Panchayat officials and community leaders
+A personal timeline with important dates (applications, verification, disbursement), synced with the user’s calendar.
 
----
+Multilingual Support
 
-Let me know when you're ready to start building—I'd be thrilled to help you code any of these modules step-by-step!
+One-click toggle between Hindi, English, Maithili, and Bhojpuri—fully localized, not just translated.
+
+AI Chat Assistant
+
+An always-available helper that answers questions, assists with forms, and troubleshoots common issues.
+
+Awareness Through Videos
+
+YouTube tutorials that break down Aadhaar seeding and DBT in easy-to-follow steps. Each video comes with a short explanation and is optimized for mobile viewing.
+
+Design Choices
+
+Mobile-first, responsive design
+
+Clean, government-trusted colors (blue, white, green)
+
+Simple icons and illustrations for clarity
+
+Friendly, easy-to-read typography
+
+Fully accessible (ARIA roles, semantic HTML)
+
+Who Benefits
+
+Students (Pre-Matric & Post-Matric)
+
+Parents and guardians
+
+Teachers and school administrators
+
+Panchayat leaders and community volunteers

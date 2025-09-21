@@ -134,7 +134,7 @@ export default function Footer({ language }: FooterProps) {
             <div className="space-y-3">
               <div className="bg-white/10 rounded-lg p-3">
                 <div className="text-sm font-medium mb-1">Helpline</div>
-                <div className="text-accent font-mono">1800-XXX-XXXX</div>
+                <div className="text-accent font-mono">9508490422</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3">
                 <div className="text-sm font-medium mb-1">Email Support</div>
