@@ -1,9 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Eye, Share2, Clock, Globe } from "lucide-react";
+import { Play, Eye, Share2, Clock, Globe, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { type Language, useTranslation } from "@/lib/i18n";
 
+// Alternative approach without ReactPlayer dependency
 interface VideoSectionProps {
   language: Language;
 }
@@ -28,7 +30,7 @@ const videos: Video[] = [
     views: "125,234 views",
     languages: "Hindi & English",
     thumbnail: "bg-primary",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Demo URL
+    embedUrl: "https://www.youtube.com/embed/0tYLwHISb84?si=EJudORv30M03r61R"
   },
   {
     id: "dbt-troubleshooting",
@@ -38,7 +40,7 @@ const videos: Video[] = [
     views: "89,567 views",
     languages: "Regional Languages",
     thumbnail: "bg-secondary",
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Demo URL
+    embedUrl: "https://www.youtube.com/embed/uoXt_6UQkAg?si=vHdz84ASoIxU1VPN"
   },
   {
     id: "scholarship-application",
@@ -63,18 +65,17 @@ const videos: Video[] = [
 export default function VideoSection({ language }: VideoSectionProps) {
   const t = useTranslation(language);
   const { toast } = useToast();
+  const [activeVideo, setActiveVideo] = useState<Video | null>(null);
 
   const handleShareVideo = (video: Video) => {
-    // Simulate sharing functionality
     if (navigator.share) {
       navigator.share({
         title: video.title,
         text: video.description,
-        url: window.location.href
+        url: video.embedUrl || window.location.href
       }).catch(console.error);
     } else {
-      // Fallback to copying link
-      navigator.clipboard.writeText(window.location.href).then(() => {
+      navigator.clipboard.writeText(video.embedUrl || window.location.href).then(() => {
         toast({
           title: "Link Copied",
           description: "Video link has been copied to your clipboard!",
@@ -85,11 +86,7 @@ export default function VideoSection({ language }: VideoSectionProps) {
 
   const handlePlayVideo = (video: Video) => {
     if (video.embedUrl) {
-      // In a real implementation, this would open a video modal or navigate to the video
-      toast({
-        title: "Opening Video",
-        description: `Loading ${video.title}...`,
-      });
+      setActiveVideo(video);
     } else {
       toast({
         title: "Video Coming Soon",
@@ -101,15 +98,16 @@ export default function VideoSection({ language }: VideoSectionProps) {
   return (
     <section className="py-16 bg-background" data-testid="video-section">
       <div className="container mx-auto px-4">
+        {/* Heading */}
         <div className="text-center mb-12">
           <h3 className="text-3xl font-bold mb-4">Watch & Learn: DBT and Aadhaar Seeding</h3>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Understand the difference between Aadhaar-linked and DBT-enabled accounts through our comprehensive video guides
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Main Featured Video */}
+          {/* Featured Video */}
           <div className="md:col-span-2 lg:col-span-1">
             <Card className="overflow-hidden border border-border hover:shadow-lg transition-shadow">
               <div className="relative aspect-video bg-muted flex items-center justify-center group cursor-pointer">
@@ -156,7 +154,7 @@ export default function VideoSection({ language }: VideoSectionProps) {
               </CardContent>
             </Card>
           </div>
-          
+
           {/* Video List */}
           <div className="space-y-4">
             {videos.slice(1).map((video) => (
@@ -247,6 +245,29 @@ export default function VideoSection({ language }: VideoSectionProps) {
           </Card>
         </div>
       </div>
+
+      {/* Video Player Modal - Using native iframe */}
+      {activeVideo?.embedUrl && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+            <iframe
+              src={activeVideo.embedUrl}
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={activeVideo.title}
+            />
+            <Button
+              onClick={() => setActiveVideo(null)}
+              className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 p-0"
+              aria-label="Close video"
+            >
+              <X size={20} />
+            </Button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
